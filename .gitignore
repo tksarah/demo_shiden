@@ -1,0 +1,12 @@
+node_modules/
+private/
+qa/
+.openai/
+.sites-workflow/
+.env
+.env.*
+!.env.example
+*.tar.gz
+*.log
+dist/config.local.json
+dist/data/

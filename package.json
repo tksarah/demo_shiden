@@ -1,0 +1,15 @@
+{
+  "name": "demo-shiden",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build-live.mjs"
+  },
+  "devDependencies": {
+    "@polkadot/api": "^17.0.2",
+    "esbuild": "^0.28.2"
+  },
+  "description": "MagiによるShiden Collatorのブロック生成・SDN報酬アニメーション"
+}
