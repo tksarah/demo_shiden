@@ -51,7 +51,6 @@ function draw(){
  setPose(wanted,phase==='idle'?activeMs/1000:t);
  let dx=0,dy=0,rotation=0,sx=1,sy=1;
  if(!reduced){
-  if(phase==='idle'){rotation=Math.sin(ambient*.63)*.38;dx=Math.sin(ambient*.41)*1.6;sy=1+Math.sin(ambient*1.45)*.0025;}
   if(phase==='creating'){rotation=Math.sin(t*1.35)*.45;sy=1+Math.sin(t*2)*.003;}
   if(phase==='sending'){const v=clamp((t-9)/1.1);rotation=-2*Math.sin(v*Math.PI);dx=-8*Math.sin(v*Math.PI);}
   if(phase==='verifying'){rotation=1.3*Math.sin((t-15)*1.35);dx=2*Math.sin(t*1.4);dy=-Math.abs(Math.sin(t*1.2))*2;}
@@ -61,10 +60,10 @@ function draw(){
   if(phase==='rest'){rotation=.3*Math.sin(t*2);}
  }
  transform('character',`translate(${dx} ${dy}) translate(350 742) rotate(${rotation}) scale(${sx} ${sy}) translate(-350 -742)`);
- // Feathered displacement acts only on loose hair and cape hems; the face and feet stay still.
+ // Output-masked fabric layers move independently; the body, staff and boots stay registered.
  el['idle-fabric'].setAttribute('filter',phase==='idle'&&!reduced?'url(#idle-breeze)':'none');
- el['hair-wind'].setAttribute('dx',String(Math.sin(ambient*.85)*42));el['hair-wind'].setAttribute('dy',String(Math.cos(ambient*.7)*65));
- el['cape-wind'].setAttribute('dx',String(Math.sin(ambient*.98+1.7)*38));el['cape-wind'].setAttribute('dy',String(Math.cos(ambient*.9+.9)*55));
+ el['hair-wind'].setAttribute('dx',String(Math.sin(ambient*.85)*92));el['hair-wind'].setAttribute('dy',String(Math.cos(ambient*.7)*143));
+ el['cape-wind'].setAttribute('dx',String(Math.sin(ambient*.98+1.7)*84));el['cape-wind'].setAttribute('dy',String(Math.cos(ambient*.9+.9)*121));
  // Only the eyelid regions change; the original face, hair and body remain registered.
  const blinkTime=ambient%13.7;
  const blink=Math.max(...[2.8,7.15,7.51,12.1].map(at=>ease((blinkTime-at)/.055)*(1-ease((blinkTime-at-.12)/.09))));

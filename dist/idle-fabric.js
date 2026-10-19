@@ -1,0 +1,20 @@
+// Coordinates refer to the original 1254px sprite, never the viewport.
+// Keep the body and both boots outside every moving layer, including its output.
+export const FABRIC_PATHS={
+ hair:[
+  'M390 480C365 525 300 545 275 589C236 642 254 681 210 714C159 756 134 794 166 831C159 871 175 946 223 973C262 987 295 959 307 929C330 873 338 818 377 770C422 714 454 635 450 571C442 527 420 500 390 480Z',
+  'M858 480C908 525 934 559 995 590C1080 627 1144 671 1122 744C1148 783 1125 822 1107 860C1142 904 1084 1008 1020 1038C984 1032 963 1000 951 952C917 877 891 843 878 780C856 705 842 644 824 589C815 544 831 504 858 480Z'
+ ],
+ cape:[
+  'M369 790C344 831 312 867 282 904L245 978C258 1040 329 1098 421 1124L445 1042C423 980 430 906 454 845Z',
+  'M852 798C894 838 952 868 986 921L1019 1012C988 1056 921 1104 856 1127L808 1039C814 984 791 916 787 853Z'
+ ]
+};
+export const FIXED_PATHS=[
+ 'M425 460H840L855 740L790 845L805 968L835 1060V1254H500L505 1040L470 970L465 835L425 720Z',
+ 'M340 440L380 430L535 1115L485 1135Z'
+];
+export function fabricMaskSVG(kind){
+ if(!Object.hasOwn(FABRIC_PATHS,kind))throw new Error('Unknown fabric region');
+ return `<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254"><defs><filter id="edge" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="9"/></filter><mask id="fabric-only" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="white"/>${FIXED_PATHS.map(d=>`<path d="${d}" fill="black"/>`).join('')}</mask></defs><g mask="url(#fabric-only)"><g filter="url(#edge)" fill="white">${FABRIC_PATHS[kind].map(d=>`<path d="${d}"/>`).join('')}</g></g></svg>`;
+}
